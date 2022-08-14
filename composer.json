@@ -1,0 +1,44 @@
+{
+    "name": "ameotoko/contao-countdown",
+    "description": "A Contao CMS extension providing countdown module and content element",
+    "license": "LGPL-3.0-or-later",
+    "type": "contao-bundle",
+    "authors": [
+        {
+            "name": "Andrey Vinichenko",
+            "homepage": "https://github.com/ameotoko"
+        }
+    ],
+    "homepage": "https://github.com/ameotoko/contao-countdown",
+    "support": {
+        "issues": "https://github.com/ameotoko/contao-countdown/issues",
+        "source": "https://github.com/ameotoko/contao-countdown"
+    },
+    "require": {
+        "php": "^7.4 || ^8.1",
+        "contao/core-bundle": "^4.13",
+        "symfony/config": "^5.4",
+        "symfony/dependency-injection": "^5.4",
+        "symfony/http-kernel": "^5.4"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0"
+    },
+    "conflict": {
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ameotoko\\Countdown\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "contao-components/installer": true,
+            "contao/manager-plugin": true
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "Ameotoko\\Countdown\\ContaoManager\\Plugin"
+    }
+}
