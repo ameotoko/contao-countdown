@@ -22,6 +22,8 @@ The widget itself is beautifully designed and developed by [@pqina][2]. Check ou
 
 The extension primarily serves the needs of my own projects, so there's not much room for customization at the moment. However, I do plan to add more settings in the future.
 
+You can totally override the templates etc. though.
+
 
 ## Usage
 
