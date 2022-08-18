@@ -1,5 +1,6 @@
 services:
     _defaults:
         autoconfigure: true
+        autowire: true
 
     Ameotoko\Countdown\CountdownContent: ~

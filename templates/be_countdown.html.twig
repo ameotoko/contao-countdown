@@ -1,0 +1,4 @@
+{% if headline is not empty %}
+    <h2>{{ headline }}</h2>
+{% endif %}
+<p>{{ 'be_wildcard'|trans({'%tstamp%': tstamp}, 'countdown') }}{% if expired %} <strong>(expired)</strong>{% endif %}</p>
