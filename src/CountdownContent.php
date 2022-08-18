@@ -14,9 +14,7 @@ use Contao\CoreBundle\ServiceAnnotation\ContentElement;
 use Contao\Date;
 use Contao\StringUtil;
 use Contao\Template;
-use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -25,20 +23,16 @@ use Symfony\Component\HttpFoundation\Response;
 class CountdownContent extends AbstractContentElementController
 {
     public const TYPE = 'countdown';
-    private RequestStack $requestStack;
     private ScopeMatcher $scopeMatcher;
-    private Packages $packages;
 
-    public function __construct(RequestStack $requestStack, ScopeMatcher $scopeMatcher, Packages $packages)
+    public function __construct(ScopeMatcher $scopeMatcher)
     {
-        $this->requestStack = $requestStack;
         $this->scopeMatcher = $scopeMatcher;
-        $this->packages = $packages;
     }
 
     protected function getResponse(Template $template, ContentModel $model, Request $request): ?Response
     {
-        if ($this->scopeMatcher->isBackendRequest($this->requestStack->getCurrentRequest())) {
+        if ($this->scopeMatcher->isBackendRequest($request)) {
             return $this->getWildcard($model);
         }
 
