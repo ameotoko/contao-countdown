@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+    <file>
+        <body>
+          <trans-unit id="FMD.countdown.0">
+            <target>Countdown</target>
+          </trans-unit>
+          <trans-unit id="FMD.countdown.1">
+            <target>Countdown widget</target>
+          </trans-unit>
+        </body>
+    </file>
+</xliff>

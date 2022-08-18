@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file>
+    <body>
+      <trans-unit id="tl_module.endDate.0">
+        <target>End datetime</target>
+      </trans-unit>
+      <trans-unit id="tl_module.endDate.1">
+        <target>Date and time to count down to, in a server's timezone.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.expire.0">
+        <target>Hide when expired</target>
+      </trans-unit>
+      <trans-unit id="tl_module.expire.1">
+        <target>Don't show if the specified date/time is in the past.</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reload.0">
+        <target>Reload</target>
+      </trans-unit>
+      <trans-unit id="tl_module.reload.1">
+        <target>Force reload page after countdown reached 0. Overrides &quot;Hide when expired&quot; checkbox.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

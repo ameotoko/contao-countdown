@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+    <file>
+        <body>
+          <trans-unit id="CTE.countdown.0">
+            <target>Countdown</target>
+          </trans-unit>
+          <trans-unit id="CTE.countdown.1">
+            <target>Displays a countdown to a specified date/time</target>
+          </trans-unit>
+        </body>
+    </file>
+</xliff>
