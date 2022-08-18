@@ -1,0 +1,30 @@
+{% extends '@Contao/block_unsearchable' %}
+
+{% block content %}
+    <div class="tick" data-did-init="handleTickInit">
+        <div data-repeat="true" data-layout="horizontal fill" data-transform="preset(d, h, m) -> delay">
+            <div class="tick-group">
+                <div data-key="value" data-view="flip" data-transform="pad(00)"></div>
+                <span data-key="label" data-view="text" class="tick-label"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleTickInit(tick) {
+            const counter = Tick.count.down('{{ endDate }}', {
+                format: ['d', 'h', 'm']
+            });
+
+            counter.onupdate = function(value) {
+                tick.value = value;
+            };
+
+            counter.onended = function() {
+                {% if reload|default(false) %}window.location.reload();
+                {% elseif expire|default(false) %}tick.root.style.display = 'none';
+                {% endif %}
+            };
+        }
+    </script>
+{% endblock %}

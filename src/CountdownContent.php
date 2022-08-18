@@ -14,6 +14,7 @@ use Contao\CoreBundle\ServiceAnnotation\ContentElement;
 use Contao\Date;
 use Contao\StringUtil;
 use Contao\Template;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,17 +27,36 @@ class CountdownContent extends AbstractContentElementController
     public const TYPE = 'countdown';
     private RequestStack $requestStack;
     private ScopeMatcher $scopeMatcher;
+    private Packages $packages;
 
-    public function __construct(RequestStack $requestStack, ScopeMatcher $scopeMatcher)
+    public function __construct(RequestStack $requestStack, ScopeMatcher $scopeMatcher, Packages $packages)
     {
         $this->requestStack = $requestStack;
         $this->scopeMatcher = $scopeMatcher;
+        $this->packages = $packages;
     }
 
     protected function getResponse(Template $template, ContentModel $model, Request $request): ?Response
     {
         if ($this->scopeMatcher->isBackendRequest($this->requestStack->getCurrentRequest())) {
             return $this->getWildcard($model);
+        }
+
+        // Don't show the countdown, if the date is in the past
+        if ((int) $model->endDate < time() && $model->expire) {
+            return new Response();
+        }
+
+        $GLOBALS['TL_CSS'][] = $template->asset('flip.min.css', 'ameotoko_countdown');
+        $GLOBALS['TL_JAVASCRIPT'][] = $template->asset('flip.min.js', 'ameotoko_countdown');
+
+        $format = 'Y-m-d\\TH:i:s.000\\Z';
+
+        try {
+            $template->endDate = (new \DateTime('@' . $model->endDate, new \DateTimeZone(Config::get('timeZone'))))
+                ->format($format);
+        } catch (\Exception $e) {
+            $template->endDate = Date::parse($format);
         }
 
         return $template->getResponse();

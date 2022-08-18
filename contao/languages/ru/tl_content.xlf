@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file>
+    <body>
+      <trans-unit id="tl_content.endDate.0">
+        <target>Дата и время</target>
+      </trans-unit>
+      <trans-unit id="tl_content.endDate.1">
+        <target>Дата и время для обратного отсчета (по часовому поясу сервера).</target>
+      </trans-unit>
+      <trans-unit id="tl_content.expire.0">
+        <target>Не показывать по истечении</target>
+      </trans-unit>
+      <trans-unit id="tl_content.expire.1">
+        <target>Счетчик не будет отображаться, если указанные дата/время находятся в прошлом.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.reload.0">
+        <target>Обновить страницу</target>
+      </trans-unit>
+      <trans-unit id="tl_content.reload.1">
+        <target>Принудительная перезагрузка страницы по достижении 0. Чекбокс &quot;Не показывать по истечении&quot; игнорируется.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
