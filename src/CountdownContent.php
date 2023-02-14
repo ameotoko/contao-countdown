@@ -9,7 +9,6 @@ namespace Ameotoko\Countdown;
 use Contao\Config;
 use Contao\ContentModel;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
-use Contao\CoreBundle\Routing\ScopeMatcher;
 use Contao\CoreBundle\ServiceAnnotation\ContentElement;
 use Contao\Date;
 use Contao\StringUtil;
@@ -23,17 +22,11 @@ use Symfony\Component\HttpFoundation\Response;
 class CountdownContent extends AbstractContentElementController
 {
     public const TYPE = 'countdown';
-    private ScopeMatcher $scopeMatcher;
-
-    public function __construct(ScopeMatcher $scopeMatcher)
-    {
-        $this->scopeMatcher = $scopeMatcher;
-    }
 
     protected function getResponse(Template $template, ContentModel $model, Request $request): ?Response
     {
-        if ($this->scopeMatcher->isBackendRequest($request)) {
-            return $this->getWildcard($model);
+        if ($this->container->get('contao.routing.scope_matcher')->isBackendRequest($request)) {
+            return $this->getBackendWildcard($model);
         }
 
         // Don't show the countdown, if the date is in the past

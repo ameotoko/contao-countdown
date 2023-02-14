@@ -8,7 +8,6 @@ namespace Ameotoko\Countdown;
 
 use Contao\Config;
 use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
-use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
 use Contao\CoreBundle\ServiceAnnotation\FrontendModule;
 use Contao\Date;
 use Contao\ModuleModel;
@@ -16,7 +15,6 @@ use Contao\StringUtil;
 use Contao\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @FrontendModule(CountdownModule::TYPE, category="miscellaneous")
@@ -24,14 +22,6 @@ use Symfony\Component\Routing\RouterInterface;
 class CountdownModule extends AbstractFrontendModuleController
 {
     public const TYPE = 'countdown';
-    private RouterInterface $router;
-    private ContaoCsrfTokenManager $tokenManager;
-
-    public function __construct(RouterInterface $router, ContaoCsrfTokenManager $tokenManager)
-    {
-        $this->router = $router;
-        $this->tokenManager = $tokenManager;
-    }
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): ?Response
     {
@@ -59,9 +49,9 @@ class CountdownModule extends AbstractFrontendModuleController
     {
         $data = StringUtil::deserialize($module->headline);
 
-        $requestToken = $this->tokenManager->getDefaultTokenValue();
+        $requestToken = $this->container->get('contao.csrf.token_manager')->getDefaultTokenValue();
 
-        $href = $this->router->generate(
+        $href = $this->container->get('router')->generate(
             'contao_backend',
             ['do' => 'themes', 'table' => 'tl_module', 'act' => 'edit', 'id' => $module->id, 'rt' => $requestToken]
         );
