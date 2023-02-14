@@ -21,28 +21,13 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CountdownModule extends AbstractFrontendModuleController
 {
+    use CountdownTrait;
+
     public const TYPE = 'countdown';
 
     protected function getResponse(Template $template, ModuleModel $model, Request $request): ?Response
     {
-        // Don't show the countdown, if the date is in the past
-        if ((int) $model->endDate < time() && $model->expire) {
-            return new Response();
-        }
-
-        $GLOBALS['TL_CSS'][] = $template->asset('flip.min.css', 'ameotoko_countdown');
-        $GLOBALS['TL_JAVASCRIPT'][] = $template->asset('flip.min.js', 'ameotoko_countdown');
-
-        $format = 'Y-m-d\\TH:i:s.000\\Z';
-
-        try {
-            $template->endDate = (new \DateTime('@' . $model->endDate, new \DateTimeZone(Config::get('timeZone'))))
-                ->format($format);
-        } catch (\Exception $e) {
-            $template->endDate = Date::parse($format);
-        }
-
-        return $template->getResponse();
+        return $this->getCountdownResponse($template, $model);
     }
 
     protected function getBackendWildcard(ModuleModel $module): Response
